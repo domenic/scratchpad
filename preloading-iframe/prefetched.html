@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Preloading from within iframes, the prefetched page</title>
+
+<p>This page might have been prefetched:</p>
+
+<p><code>deliveryType:</code> <span id="deliveryType"></span></p>
+
+<script type="module">
+  document.querySelector('#deliveryType').textContent = JSON.stringify(performance.getEntriesByType('navigation')[0].deliveryType);
+</script>
