@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Preloading delayed</title>
+
+<p><button id="prefetch">Prefetch in 5 seconds and navigate in 10 seconds</button>
+
+<p><button id="prerender">Prerender in 5 seconds and navigate in 10 seconds</button>
+
+<script type="module">
+prefetch.onclick = () => {
+  delayedAddSpeculationRules('prefetch');
+};
+
+prerender.onclick = () => {
+  delayedAddSpeculationRules('prerender');
+};
+
+function delayedAddSpeculationRules(type) {
+  const url = 'preloaded.html?' + type;
+
+  const script = document.createElement('script');
+  script.type = 'speculationrules';
+  script.textContent = JSON.stringify({
+    type: 'speculationrules',
+    [type]: [
+      {
+        urls: [url]
+      }
+    ]
+  });
+
+  setTimeout(() => {
+    document.body.append(script);
+  }, 5000);
+
+  setTimeout(() => {
+    window.location.href = url;
+  }, 10000);
+}
+</script>

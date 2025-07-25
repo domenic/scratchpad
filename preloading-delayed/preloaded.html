@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Preloading delayed, the preloaded page</title>
+
+<p>This page might have been preloaded:</p>
+
+<p><code>deliveryType:</code> <span id="deliveryType"></span></p>
+
+<p><code>prerendering:</code> <span id="prerendering"></span></p>
+
+<script type="module">
+  document.querySelector('#deliveryType').textContent = JSON.stringify(performance.getEntriesByType('navigation')[0].deliveryType);
+  document.querySelector('#prerendering').textContent = JSON.stringify(document.prerendering);
+</script>
