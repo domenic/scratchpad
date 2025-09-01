@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Preloading with base URL changes</title>
+
+<button id="change-base-url">Change the base URL</button>
+
+<script type="module">
+window.addEventListener("error", e => {
+  console.log("Error event:", e.error);
+});
+
+document.querySelector("#change-base-url").addEventListener("click", () => {
+  const base = document.createElement("base");
+  base.href = `/${Math.random()}/`;
+  document.head.prepend(base);
+});
+</script>
+
+<script type="speculationrules">
+{ invalid JSON }
+</script>
