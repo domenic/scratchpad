@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Script error event timing</title>
+
+<p>Open the console</p>
+
+<script>
+window.addEventListener("error", e => {
+  console.log("window error event:", e.error);
+});
+
+const classicScript = document.createElement("script");
+classicScript.textContent = "++++++syntaxerror++++";
+classicScript.addEventListener("error", e => {
+  console.log("classic script error event:", e.error);
+});
+
+console.log("Before appending classic script");
+document.head.append(classicScript);
+console.log("After appending classic script");
+
+const importMap = document.createElement("script");
+importMap.type = "importmap";
+importMap.textContent = "{ invalid json }";
+importMap.addEventListener("error", e => {
+  console.log("import map error event:", e.error);
+});
+
+console.log("Before appending import map");
+document.head.append(importMap);
+console.log("After appending import map");
+</script>
